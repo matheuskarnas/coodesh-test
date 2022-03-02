@@ -1,3 +1,5 @@
-export const App = () => <h1>teste</h1>
+import { Header } from "./components/Header";
+
+export const App = () => <Header />
 
 
