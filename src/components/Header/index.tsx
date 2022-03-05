@@ -2,6 +2,6 @@ import * as S from './style'
 
 export const Header = () =>( 
     <S.Container>
-        <h1>teste</h1>
+        <h1>Header</h1>
     </S.Container>
 )
