@@ -27,7 +27,6 @@ export type UserData = {
     }
 }
 
-
 const baseUrl = 'https://randomuser.me/api/?results=50&exc=login,phone,registered'
 
 export const Table = () => {
@@ -35,19 +34,17 @@ export const Table = () => {
 
     useEffect(() => {
         axios.get(baseUrl)
-            .then(r => setData(data => data.concat(r.data.results)))
+            .then(r => r.data.results.map(user => {
+                if (user.id.value !== null && user.id.name !== undefined) {
+                    setData(data => data.concat(user))
+                }
+            }))
     }, [])
-
-
-
-    console.log('data', data)
-
 
     return (
         <>
             <h1>Table</h1>
             <h1>{data.length}</h1>
-            {/* {data.map(r => <h1>{r.id.name}</h1>)} */}
             <Grid data={data} />
         </>
     )
