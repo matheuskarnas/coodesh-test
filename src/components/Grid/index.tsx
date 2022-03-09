@@ -1,11 +1,10 @@
+import { Button } from "@mui/material";
 import { DataGrid, GridColDef } from "@mui/x-data-grid";
-import { useState } from "react";
+import { useContext, useState } from "react";
+import { UsersContext } from "../../App";
 import Modal from "../Modal";
 import { UserData } from "../Table";
 
-type GridProps = {
-    data: UserData[];
-}
 
 type RowProps = {
     id: string,
@@ -14,15 +13,17 @@ type RowProps = {
     birth: number,
 }
 
-export const Grid = ({ data }: GridProps) => {
+export const Grid = () => {
     const rows: RowProps[] = []
     const [userModal, setUserModal] = useState<UserData>();
     const [open, setOpen] = useState(false);
 
+    const context = useContext(UsersContext)
+
     const handleClose = () => setOpen(false);
 
     const handleOpen = (idRow: string) => {
-        data.map(user => {
+        context.map(user => {
             if (user.id.name === idRow || user.id.value === idRow) {
                 setUserModal(user)
                 setOpen(true)
@@ -44,6 +45,7 @@ export const Grid = ({ data }: GridProps) => {
             //         color="primary"
             //         size="small"
             //         style={{ marginLeft: 16 }}
+            //         onClick={(e) => handleOpen()}
             //     >
             //         Open
             //     </Button>
@@ -52,7 +54,7 @@ export const Grid = ({ data }: GridProps) => {
     ]
 
     const createRow = () => {
-        data.map(user => {
+        context.map(user => {
             rows.push({
                 id: user.id.value || user.id.name,
                 name: user.name.first,

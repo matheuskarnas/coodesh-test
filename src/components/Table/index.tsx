@@ -27,25 +27,13 @@ export type UserData = {
     }
 }
 
-const baseUrl = 'https://randomuser.me/api/?results=50&exc=login,phone,registered'
 
 export const Table = () => {
-    const [data, setData] = useState<UserData[]>([])
-
-    useEffect(() => {
-        axios.get(baseUrl)
-            .then(r => r.data.results.map(user => {
-                if (user.id.value !== null && user.id.name !== undefined) {
-                    setData(data => data.concat(user))
-                }
-            }))
-    }, [])
 
     return (
         <>
-            <h1>Table</h1>
-            <h1>{data.length}</h1>
-            <Grid data={data} />
+            <h1>Table</h1>            
+            <Grid />
         </>
     )
 }
