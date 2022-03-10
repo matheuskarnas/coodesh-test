@@ -69,6 +69,7 @@ export const Grid = () => {
             <Modal open={open} handleClose={handleClose} user={userModal} />
             <div style={{ height: 500, width: '100%' }}>
                 <DataGrid
+                    autoHeight={true}
                     columns={columns}
                     rows={rows}
                     onRowClick={({ row }) => handleOpen(row.id)}
